@@ -28,9 +28,10 @@ Exceptions (`@@`) are never converted into blocks; cosmetic rules are dropped
 - `lists` branch — `merged-blocklist.txt` + `build-info.txt`. This is what you
   point AdGuard at.
 
-Fail-safe: if any source fails to download, returns HTML, or yields fewer than
-1000 usable rules, the build aborts and the previously published list stays
-live. A broken upstream never silently thins your blocking.
+Fail-safe: if a source fails to download, returns HTML, or yields zero usable
+rules, the build aborts and the previously published list stays live. Up to
+`--allow-failures 3` transient failures are tolerated and recorded in
+`build-info.txt`.
 
 ## Using it in AdGuard Home
 
