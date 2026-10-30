@@ -1,0 +1,12 @@
+# One URL per line. Lines starting with # are ignored.
+# Removing a list here removes its rules on the next rebuild (Monday 04:00 UTC).
+#
+# Tip: the merged file is ~26 MB / 1.24M rules with all six. Drop the last two
+# (1Hosts Xtra, StevenBlack) to land near 540k rules and ~11 MB.
+
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/ultimate.txt
+https://big.oisd.nl/domainswild
+https://raw.githubusercontent.com/badmojr/1Hosts/master/Lite/domains.wildcards
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
+https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+https://raw.githubusercontent.com/badmojr/1Hosts/master/Xtra/domains.wildcards

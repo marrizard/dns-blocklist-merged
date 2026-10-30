@@ -1,0 +1,40 @@
+name: rebuild blocklist
+
+on:
+  schedule:
+    - cron: "0 4 * * 1"      # Mondays 04:00 UTC
+  workflow_dispatch:          # manual "Run workflow" button
+  push:
+    branches: [main]          # rebuild when lists.txt or merge.py changes
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rebuild-blocklist
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Merge + dedupe
+        run: python merge.py --out merged-blocklist.txt --info build-info.txt
+
+      - name: Publish to 'lists' branch
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch --orphan publish
+          git add -f merged-blocklist.txt build-info.txt
+          git commit -m "rebuild $(date -u +%Y-%m-%d)"
+          git push --force origin publish:lists
+
+      - name: Summary
+        run: cat build-info.txt >> "$GITHUB_STEP_SUMMARY"
