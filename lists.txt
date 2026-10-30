@@ -1,12 +1,18 @@
-# Exactly the blocklists currently enabled in your AdGuard Home (24 of 27).
+﻿# Merged set: the 24 lists enabled in AdGuard Home, plus 2 that were disabled but measured to add real coverage.
 # Read from /control/filtering/status on 2026-10-30.
-# Disabled in AdGuard, so NOT merged: urlhaus, OISD Blocklist Big, HaGeZi's Normal.
+# Excluded: urlhaus (disabled, 0 rules).
 #
 # Order does not matter; the merge dedupes across all of them.
 
 # --- AdGuard official ---
 https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
 https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
+
+# --- added 2026-10-30: disabled in your AdGuard, but measured to add real coverage ---
+# OISD Big  -> +73,085 hosts not blocked by the other 24
+# HaGeZi N. -> +83,877 hosts not blocked by the other 24
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_27.txt
+https://adguardteam.github.io/HostlistsRegistry/assets/filter_34.txt
 
 # --- Firebog "ticked" set ---
 https://v.firebog.net/hosts/static/w3kbl.txt
@@ -37,3 +43,5 @@ https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt
 https://phishing.army/download/phishing_army_blocklist_extended.txt
 https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-malware.txt
 https://lists.cyberhost.uk/malware.txt
+
+
