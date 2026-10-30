@@ -25,7 +25,7 @@ jobs:
           python-version: "3.12"
 
       - name: Merge + dedupe
-        run: python merge.py --out merged-blocklist.txt --info build-info.txt
+        run: python merge.py --out merged-blocklist.txt --info build-info.txt --allow-failures 3
 
       - name: Publish to 'lists' branch
         run: |

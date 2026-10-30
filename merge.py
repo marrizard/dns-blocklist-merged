@@ -83,9 +83,11 @@ def parse(text: str):
             continue
 
         host = m.group(1).lower().rstrip(".")
-        if not host or "*" in host or "." not in host:
+        if "*" in host:
             verbatim.add(line)
             continue
+        if not host or "." not in host:
+            continue  # localhost / broadcasthost / ip6-allnodes style noise
         hosts.add(host)
     return hosts, verbatim, allow
 
@@ -95,6 +97,8 @@ def main() -> int:
     ap.add_argument("--lists", default="lists.txt")
     ap.add_argument("--out", default="merged-blocklist.txt")
     ap.add_argument("--info", default="build-info.txt")
+    ap.add_argument("--allow-failures", type=int, default=0,
+                    help="tolerate this many unreachable sources (default 0)")
     args = ap.parse_args()
 
     with open(args.lists, encoding="utf-8") as fh:
@@ -108,23 +112,23 @@ def main() -> int:
     verbatim: set[str] = set()
     allow: set[str] = set()
     stats = []
+    failures: list[tuple[str, str]] = []
     raw_total = 0
 
     for url in urls:
         try:
             text = fetch(url)
         except Exception as exc:  # noqa: BLE001
-            print(f"ABORT: cannot fetch {url}\n  {exc}", file=sys.stderr)
-            return 1
+            print(f"FAILED: {url}\n  {exc}", file=sys.stderr)
+            failures.append((url, str(exc)))
+            continue
 
         hosts, verb, allow_this, = parse(text)
         if len(hosts) < MIN_RULES_PER_SOURCE:
-            print(
-                f"ABORT: {url} returned only {len(hosts)} usable rules "
-                f"(min {MIN_RULES_PER_SOURCE}) - list probably moved or broke",
-                file=sys.stderr,
-            )
-            return 1
+            msg = f"only {len(hosts)} usable rules (min {MIN_RULES_PER_SOURCE})"
+            print(f"FAILED: {url}: {msg}", file=sys.stderr)
+            failures.append((url, msg))
+            continue
 
         before = len(seen)
         seen |= hosts
@@ -136,6 +140,16 @@ def main() -> int:
         raw_total += len(hosts)
         stats.append((url, len(hosts), added, dup))
         print(f"{added:>8} new / {len(hosts):>8} rules  ({dup:5.1f}% dup)  {url}")
+
+    if len(failures) > args.allow_failures:
+        print(
+            f"ABORT: {len(failures)} source(s) failed, allowed {args.allow_failures}. "
+            "Keeping the previously published list.",
+            file=sys.stderr,
+        )
+        for url, why in failures:
+            print(f"  {url}: {why}", file=sys.stderr)
+        return 1
 
     if len(seen) < MIN_TOTAL_RULES:
         print(
@@ -163,6 +177,10 @@ def main() -> int:
         fh.write(f"exceptions kept: {len(allow)}\n\n")
         for url, parsed, added, dup in stats:
             fh.write(f"{added:>8} new / {parsed:>8} rules ({dup:5.1f}% dup)  {url}\n")
+        if failures:
+            fh.write(f"\nWARNING: {len(failures)} source(s) unreachable this run:\n")
+            for url, why in failures:
+                fh.write(f"  {url}: {why}\n")
 
     print(f"wrote {args.out}: {len(seen)} unique rules from {raw_total} raw")
     return 0
