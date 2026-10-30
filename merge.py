@@ -24,7 +24,7 @@ import time
 import urllib.error
 import urllib.request
 
-MIN_RULES_PER_SOURCE = 1_000
+MIN_RULES_PER_SOURCE = 1
 MIN_TOTAL_RULES = 100_000
 TIMEOUT = 180
 RETRIES = 3
@@ -73,6 +73,10 @@ def parse(text: str):
             continue
         if COSMETIC_RE.search(line):
             continue
+        if "#" in line:
+            line = line.split("#", 1)[0].strip()
+            if not line:
+                continue
         if line.startswith("@@"):
             allow.add(line)
             continue
