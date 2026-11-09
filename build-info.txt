@@ -1,0 +1,36 @@
+built: 2026-11-09T12:25:58Z
+unique rules: 732601
+raw rules read: 1127721
+duplicate share: 35.0%
+verbatim rules kept: 526
+exceptions kept: 214
+
+  187311 new /   187311 rules (  0.0% dup)  https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
+    5529 new /     6540 rules ( 15.5% dup)  https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
+  169794 new /   231921 rules ( 26.8% dup)  https://adguardteam.github.io/HostlistsRegistry/assets/filter_27.txt
+   82582 new /   207061 rules ( 60.1% dup)  https://adguardteam.github.io/HostlistsRegistry/assets/filter_34.txt
+     162 new /      351 rules ( 53.8% dup)  https://v.firebog.net/hosts/static/w3kbl.txt
+      10 new /     1653 rules ( 99.4% dup)  https://v.firebog.net/hosts/Admiral.txt
+   12978 new /    51631 rules ( 74.9% dup)  https://v.firebog.net/hosts/Easylist.txt
+   13111 new /    43263 rules ( 69.7% dup)  https://v.firebog.net/hosts/Easyprivacy.txt
+    1569 new /     4269 rules ( 63.2% dup)  https://v.firebog.net/hosts/Prigent-Ads.txt
+   11238 new /    11490 rules (  2.2% dup)  https://v.firebog.net/hosts/Prigent-Crypto.txt
+   30665 new /    43379 rules ( 29.3% dup)  https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
+   38566 new /    42358 rules (  9.0% dup)  https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
+    7168 new /    18581 rules ( 61.4% dup)  https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
+      39 new /       57 rules ( 31.6% dup)  https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts
+    1924 new /     2189 rules ( 12.1% dup)  https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts
+     506 new /     2030 rules ( 75.1% dup)  https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts
+       2 new /        9 rules ( 77.8% dup)  https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts
+     266 new /      347 rules ( 23.3% dup)  https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt
+    4127 new /    12280 rules ( 66.4% dup)  https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
+    6559 new /     8140 rules ( 19.4% dup)  https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt
+     899 new /      929 rules (  3.2% dup)  https://raw.githubusercontent.com/AssoEchap/stalkerware-indicators/master/generated/hosts
+     169 new /     3560 rules ( 95.3% dup)  https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
+    2664 new /     4922 rules ( 45.9% dup)  https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt
+   58172 new /   144114 rules ( 59.6% dup)  https://phishing.army/download/phishing_army_blocklist_extended.txt
+      66 new /      125 rules ( 47.2% dup)  https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-malware.txt
+   96525 new /    99211 rules (  2.7% dup)  https://lists.cyberhost.uk/malware.txt
+
+WARNING: 1 source(s) unreachable this run:
+  ﻿# Merged set: the 24 lists enabled in AdGuard Home, plus 2 that were disabled but measured to add real coverage.: ﻿# Merged set: the 24 lists enabled in AdGuard Home, plus 2 that were disabled but measured to add real coverage.: unknown url type: '\ufeff# Merged set: the 24 lists enabled in AdGuard Home, plus 2 that were disabled but measured to add real coverage.'
